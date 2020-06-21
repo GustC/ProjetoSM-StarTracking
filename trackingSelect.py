@@ -97,7 +97,7 @@ class TrackingSelect:
 
             cv.imshow(self.windowName, self.frame)
 
-            key = cv.waitKey(1)
+            key = cv.waitKey(self.default_speed)
             if key == 27:
                 break
             if key == ord('p'):
