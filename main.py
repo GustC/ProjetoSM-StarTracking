@@ -13,7 +13,7 @@ class App:
 
         self.switch_variable = tkinter.StringVar(value="random")
         self.random_button = tkinter.Radiobutton(window, text="Aleatorio", variable=self.switch_variable,
-                            indicatoron=False, value="random" )
+                            indicatoron=False, value="random" ) 
         self.select_button = tkinter.Radiobutton(window, text="Selecionavel", variable=self.switch_variable,
                                     indicatoron=False, value="select")
 
@@ -45,8 +45,8 @@ class MyVideoCapture:
             raise ValueError("Unable to open video source", video_source)
 
         # Get video source width and height
-        self.width = self.vid.get(600)
-        self.height = self.vid.get(400)
+        self.width = self.vid.get(800)
+        self.height = self.vid.get(600)
 
 
     def start(self):

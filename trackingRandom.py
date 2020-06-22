@@ -9,6 +9,7 @@ import threading
 class TrackingRandom:
     def __init__(self,root,videoCapture):
         self.cap = videoCapture
+        self.qtd_starts = 50
         self.windowName = "Modo Random"
         self.window = Toplevel(root)
         self.window.title = "Controles"
@@ -20,7 +21,7 @@ class TrackingRandom:
         self.btnStop.grid(row=0,column=2,stick=NSEW)
         self.isPause = False
         self.isStop = False
-        self.config = ConfigApp(typeDay=typeDayNight,qtyStars=50)
+        self.config = ConfigApp(typeDay=typeDayNight,qtyStars=self.qtd_starts)
         self.feature_params = self.config.configFeature
         self.lk_params = self.config.configLk
         self.framesToClear = 25
@@ -65,6 +66,12 @@ class TrackingRandom:
 
         color = np.random.randint(0,255,(100,3))
 
+        def qtd_stars_demo(val):
+            self.qtd_starts = cv.getTrackbarPos("Stars:", self.windowName)
+            if self.qtd_starts == 0:
+                self.qtd_starts = 1
+            ConfigApp(typeDay=typeDayNight,qtyStars=self.qtd_starts)
+            
         def video_speed_demo(val):
             self.default_speed = cv.getTrackbarPos("Speed:", self.windowName)
             if self.default_speed == 0:
@@ -74,7 +81,8 @@ class TrackingRandom:
         frameCount = 0
         cv.namedWindow(self.windowName, cv.WINDOW_NORMAL) 
         cv.resizeWindow(self.windowName, 600,400)
-        cv.createTrackbar("Speed:", self.windowName, self.default_speed, self.max_value, video_speed_demo)
+        cv.createTrackbar("Speed:", self.windowName, self.default_speed, self.max_value, video_speed_demo)  
+        cv.createTrackbar("Stars:", self.windowName, self.qtd_starts, self.max_value, qtd_stars_demo)
 
         while(self.cap.isOpened()):
             while(self.isPause):

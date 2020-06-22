@@ -70,7 +70,7 @@ class TrackingSelect:
                 self.old_points = np.array([[x, y]], dtype=np.float32)
 
         cv.namedWindow(self.windowName, cv.WINDOW_NORMAL) 
-        cv.resizeWindow(self.windowName, 600,400)
+        cv.resizeWindow(self.windowName, 800,600)
         cv.setMouseCallback(self.windowName, select_point)
         cv.createTrackbar("Speed:", self.windowName, self.default_speed, self.max_value, video_speed_demo)        
 
@@ -98,10 +98,13 @@ class TrackingSelect:
             cv.imshow(self.windowName, self.frame)
 
             key = cv.waitKey(self.default_speed)
-            if key == 27:
+            if key == ord('q'):      
                 break
-            if key == ord('p'):
-                cv.waitKey(-1)       
+            elif key == ord('p'):
+                cv.waitKey(0)
+            elif key == 27:
+                break
+     
         self.cap.release()
         cv.destroyAllWindows()
         self.window.destroy()

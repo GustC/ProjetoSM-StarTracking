@@ -17,7 +17,7 @@ lk_params_night = dict( winSize  = (60,60),
 typeDayNight = "night"
 typeDayNight = "day"
 class ConfigApp:
-    def __init__(self,typeDay,qtyStars=50):
+    def __init__(self,typeDay,qtyStars):
         if(typeDay == typeDayNight):
             if(qtyStars > 100):
                 qtyStars = 100
